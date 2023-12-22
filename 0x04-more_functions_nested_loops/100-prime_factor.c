@@ -4,35 +4,42 @@
 /**
  * main - Entry point
  *
+ * Description: Finds the largest prime factor of a number
  * Return: Always 0
  */
 int main(void)
 {
-	long long number = 612852475143;
-	long long maxPrime = -1;
+    unsigned long number = 612852475143;
+    unsigned long maxPrime = 0;
+    unsigned long i = 0;
 
-	while (number % 2 == 0)
-	{
-		maxPrime = 2;
-		number /= 2;
-	}
+    /* Divide by 2 until it's odd */
+    while (number % 2 == 0)
+    {
+        maxPrime = 2;
+        number /= 2;
+    }
 
-	for (long long i = 3; i <= sqrt(number); i += 2)
-	{
-		while (number % i == 0)
-		{
-			maxPrime = i;
-			number /= i;
-		}
-	}
+    /* Check odd factors starting from 3 */
+    for (i = 3; i <= sqrt(number); i += 2)
+    {
+        /* While i is a factor, update maxPrime */
+        while (number % i == 0)
+        {
+            maxPrime = i;
+            number /= i;
+        }
+    }
 
-	if (number > 2)
-	{
-		maxPrime = number;
-	}
+    /* If remaining number is greater than 2, update maxPrime */
+    if (number > 2)
+    {
+        maxPrime = number;
+    }
 
-	printf("%lld\n", maxPrime);
+    /* Print the largest prime factor */
+    printf("%lu\n", maxPrime);
 
-	return (0);
+    return 0;
 }
 
